@@ -109,32 +109,6 @@ Built by **Poovarasu S**
 
 ---
 
-## 🌐 Manual Deployment (Vercel)
-
-NexBot can be easily deployed to Vercel as a hybrid application (Static Frontend + Serverless Backend).
-
-1. Install **Vercel CLI** globally (if not already installed):
-   ```bash
-   npm install -g vercel
-   ```
-
-2. Run the deployment command in the root folder:
-   ```bash
-   vercel
-   ```
-   *Follow the CLI prompts to link the project and deploy it.*
-
-3. Set your environment variables on the Vercel Dashboard:
-   - Go to your Project settings -> **Environment Variables**.
-   - Add a new environment variable: `NVIDIA_API_KEY` and set it to your NVIDIA API Key.
-
-4. Deploy to production:
-   ```bash
-   vercel --prod
-   ```
-
----
-
 ## 📄 License
 This project is licensed under the **MIT License**. You are free to use, modify, and distribute this software.
 
