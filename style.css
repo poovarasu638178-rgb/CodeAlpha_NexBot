@@ -101,6 +101,7 @@ input, textarea, select {
 .app {
   display: flex;
   height: 100vh;
+  height: 100dvh;
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -138,6 +139,7 @@ input, textarea, select {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh;
   z-index: 200;
   flex-shrink: 0;
   overflow: hidden;
@@ -302,6 +304,7 @@ input, textarea, select {
   background: var(--bg-primary);
   min-width: 0;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   transition: background var(--transition);
 }
@@ -360,9 +363,11 @@ input, textarea, select {
   transition: background var(--transition), color var(--transition);
 }
 
-.topbar-btn:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
+@media (hover: hover) {
+  .topbar-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+  }
 }
 
 .topbar-btn svg {
@@ -386,6 +391,7 @@ input, textarea, select {
   flex-direction: column;
   overflow: hidden;
   height: calc(100vh - var(--topbar-height));
+  height: calc(100dvh - var(--topbar-height));
 }
 
 .view-container.active {

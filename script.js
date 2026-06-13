@@ -271,12 +271,12 @@ async function sendMessage(text) {
     const contentDiv = botMsg.querySelector(".message-text");
     
     let currentText = "";
-    const chunkSize = 3; // 3 chars per tick for a fast, readable typing speed
+    const chunkSize = 8; // Faster typing speed (8 chars per tick)
     for (let i = 0; i < answer.length; i += chunkSize) {
       currentText += answer.substring(i, i + chunkSize);
       contentDiv.innerHTML = parseMarkdown(currentText);
       scrollToBottom();
-      await new Promise(r => setTimeout(r, 10)); // 10ms delay
+      await new Promise(r => setTimeout(r, 5)); // Lower 5ms delay
     }
     contentDiv.innerHTML = parseMarkdown(answer);
     scrollToBottom();
