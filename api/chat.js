@@ -1,19 +1,32 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
 const axios = require('axios');
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.static('.'));
+module.exports = async (req, res) => {
+  // Add CORS headers for safety
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  );
 
-const NVIDIA_API_KEY = process.env.NVIDIA_API_KEY;
-const INVOKE_URL = "https://integrate.api.nvidia.com/v1/chat/completions";
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
 
-app.post('/api/chat', async (req, res) => {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ reply: "Method Not Allowed" });
+  }
+
   try {
     const { message } = req.body;
+    const NVIDIA_API_KEY = process.env.NVIDIA_API_KEY;
+    const INVOKE_URL = "https://integrate.api.nvidia.com/v1/chat/completions";
+
+    if (!NVIDIA_API_KEY) {
+      return res.status(500).json({ reply: "NVIDIA API Key is missing in environment variables!" });
+    }
 
     const payload = {
       model: "minimaxai/minimax-m3",
@@ -49,11 +62,6 @@ app.post('/api/chat', async (req, res) => {
     } else {
       console.error(error.message);
     }
-    res.status(500).json({ reply: "Sorry, I'm having trouble right now. Please try again!" });
+    res.status(500).json({ reply: "Sorry, I'm having trouble connecting to the AI. Please try again!" });
   }
-});
-
-app.listen(3000, () => {
-  console.log('✅ NexBot server running on http://localhost:3000');
-  console.log('   Model: minimaxai/minimax-m3 via NVIDIA NIM');
-});
+};
