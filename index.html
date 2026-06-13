@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NexBot — Your intelligent AI FAQ assistant powered by MiniMax M3.">
+  <title>NexBot — AI FAQ Assistant</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar Overlay (mobile backdrop) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <!-- Sidebar Header with close button on mobile -->
+        <div class="sidebar-header">
+          <div class="logo">
+            <img src="favicon.png" alt="NexBot" class="logo-img">
+            <span class="logo-text">Nex<span class="accent">Bot</span></span>
+          </div>
+          <button class="sidebar-close-btn" id="sidebarCloseBtn" title="Close sidebar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <button class="new-chat-btn" id="newChatBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+          New Chat
+        </button>
+
+        <div class="recent-label">Recent Questions</div>
+        <nav class="chat-history" id="chatHistory">
+          <!-- Populated by JS -->
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom" title="NexBot — Created by Poovarasu S for CodeAlpha AI Internship 2026">
+        NexBot — Created by Poovarasu S for CodeAlpha AI Internship 2026
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <!-- Sidebar Toggle — always visible -->
+          <button class="topbar-btn" id="sidebar-toggle" title="Toggle Sidebar" aria-label="Toggle Sidebar">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2"/>
+              <path d="M9 3v18"/>
+            </svg>
+          </button>
+          <h1 class="topbar-title" id="topbarTitle"></h1>
+        </div>
+
+        <div class="topbar-actions">
+          <!-- Dark Mode Toggle -->
+          <button class="topbar-btn" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+            <!-- Sun icon (shown in dark mode) -->
+            <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+            </svg>
+            <!-- Moon icon (shown in light mode) -->
+            <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+          </button>
+
+          <!-- Clear Chat -->
+          <button class="topbar-btn" id="clearBtn" title="Clear chat" aria-label="Clear chat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Chat View -->
+      <div class="view-container active" id="chat-view">
+        <div class="chat-container" id="chatContainer">
+          <div class="welcome" id="welcome">
+            <div class="welcome-logo">
+              <img src="favicon.png" alt="NexBot" class="welcome-logo-img">
+            </div>
+            <h2 class="welcome-title">How can I help you today?</h2>
+            <p class="welcome-subtitle">Ask me anything — AI, tech, science, and beyond.</p>
+            <div class="suggestions" id="suggestionsContainer">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+          <div class="messages" id="messages"></div>
+        </div>
+
+        <footer class="input-area">
+          <div class="input-wrapper">
+            <div class="input-container">
+              <textarea
+                id="messageInput"
+                class="message-input"
+                placeholder="Ask NexBot a question..."
+                rows="1"
+                maxlength="2000"
+              ></textarea>
+              <button class="send-btn" id="sendBtn" disabled aria-label="Send message">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+            <p class="disclaimer">NexBot is Powered by AI — Please double check responses.</p>
+          </div>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
