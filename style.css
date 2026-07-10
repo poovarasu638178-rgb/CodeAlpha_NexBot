@@ -319,7 +319,7 @@ input, textarea, select {
   justify-content: space-between;
   height: var(--topbar-height);
   min-height: var(--topbar-height);
-  padding: 0 16px;
+  padding: 0 max(16px, calc((100% - 900px) / 2 + 16px));
   border-bottom: 1px solid var(--border-light);
   background: var(--bg-primary);
   z-index: 10;
@@ -390,8 +390,7 @@ input, textarea, select {
   flex: 1;
   flex-direction: column;
   overflow: hidden;
-  height: calc(100vh - var(--topbar-height));
-  height: calc(100dvh - var(--topbar-height));
+  min-height: 0;
 }
 
 .view-container.active {
@@ -426,17 +425,17 @@ input, textarea, select {
   align-items: center;
   justify-content: center;
   flex: 1;
-  padding: 48px 24px 24px;
+  padding: 24px 16px 16px;
   text-align: center;
   animation: fadeUp 0.4s ease;
-  max-width: 680px;
+  max-width: 900px;
   margin: 0 auto;
   width: 100%;
 }
 
 .welcome.hidden { display: none; }
 
-.welcome-logo { margin-bottom: 24px; }
+.welcome-logo { margin-bottom: 16px; }
 
 .welcome-logo-img {
   width: 56px;
@@ -457,7 +456,7 @@ input, textarea, select {
 .welcome-subtitle {
   font-size: 16px;
   color: var(--text-secondary);
-  margin-bottom: 36px;
+  margin-bottom: 24px;
 }
 
 /* Suggestion cards */
@@ -496,8 +495,8 @@ input, textarea, select {
 .messages {
   display: none;
   flex-direction: column;
-  padding: 24px 0 16px;
-  max-width: 780px;
+  padding: 16px 0 8px;
+  max-width: 900px;
   width: 100%;
   margin: 0 auto;
 }
@@ -507,7 +506,7 @@ input, textarea, select {
 .message {
   display: flex;
   gap: 14px;
-  padding: 20px 24px;
+  padding: 12px 16px;
   animation: fadeUp 0.3s ease;
 }
 
@@ -681,13 +680,18 @@ input, textarea, select {
    ============================================================ */
 
 .input-area {
-  padding: 0 20px 20px;
+  padding: 8px 0 12px;
   background: var(--bg-primary);
   flex-shrink: 0;
   transition: background var(--transition);
 }
 
-.input-wrapper { max-width: 780px; margin: 0 auto; }
+.input-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 16px;
+}
 
 .input-container {
   display: flex;
@@ -750,7 +754,7 @@ input, textarea, select {
   text-align: center;
   font-size: 12px;
   color: var(--text-subtle);
-  margin-top: 8px;
+  margin-top: 6px;
   line-height: 1.4;
   letter-spacing: 0.1px;
 }
