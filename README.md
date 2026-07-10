@@ -24,9 +24,23 @@ NexBot is a Claude-style AI chatbot powered by the NVIDIA API via a Node.js prox
 - ✅ **Responsive Design**: Works perfectly across mobile, tablet, and desktop devices.
 - ✅ **Secure Architecture**: API keys are securely managed server-side.
 
-## How It Works
+## ⚙️ How It Works
 
-NexBot utilizes a Node.js proxy architecture to communicate with the NVIDIA API.
+```mermaid
+flowchart LR
+  A[User Input] --> B[TF-IDF Engine]
+  B --> C[Proxy Request]
+  C --> D[NVIDIA API]
+  D --> E[Response Assembly]
+  E --> F[Markdown Render]
+```
+
+1. **User Input**: Client submits text, immediately locking the UI and injecting a placeholder typing indicator into the DOM.
+2. **TF-IDF Engine**: A local vectorization algorithm calculates cosine similarity to check the query against a hardcoded FAQ dataset.
+3. **Proxy Request**: If the similarity score falls below the threshold, the client executes an asynchronous fetch to the Node.js backend.
+4. **NVIDIA API**: The Express server intercepts the request, injects the secure API key, and forwards the payload to the Minimax model.
+5. **Response Assembly**: The proxy receives the generated completion and returns it back to the client as JSON.
+6. **Markdown Render**: The frontend parses the raw text via marked.js and sequentially updates the DOM to simulate natural typing.
 
 **Why a Proxy? (API Key Security)**
 Instead of exposing the sensitive NVIDIA API key to the client's browser, the frontend sends a request to our local Node.js backend (`server.js`). The backend then securely attaches the API key and makes the actual request to the NVIDIA NIM endpoint (`https://integrate.api.nvidia.com/v1/chat/completions`). This ensures your credentials remain completely private and secure from malicious actors.
