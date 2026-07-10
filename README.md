@@ -13,16 +13,16 @@ Your intelligent AI companion, always ready to help.
 
 ## About
 
-NexBot is a Claude-style AI chatbot powered by the NVIDIA API via a Node.js proxy. Built to be fast, elegant, and secure, NexBot acts as your intelligent AI companion to help answer questions clearly and concisely using the powerful `minimaxai/minimax-m3` model via NVIDIA NIM.
+NexBot is a fast, secure Claude-style AI chatbot. It uses a Node.js proxy to connect the frontend directly to the powerful `minimaxai/minimax-m3` model via NVIDIA NIM. Built for elegance and speed, NexBot acts as your intelligent companion for clear, concise answers.
 
 ## Features
 
-- ✅ **Real-Time Chat**: Engage in seamless conversations with near-instant responses.
-- ✅ **Context-Aware Responses**: The chatbot understands context and provides accurate answers.
-- ✅ **Clean UI**: A stunning, modern, compact single-viewport design similar to top-tier chat interfaces.
-- ✅ **Dark Mode Support**: Easily toggle between beautiful Soft Cream (light) and Dark themes.
-- ✅ **Responsive Design**: Works perfectly across mobile, tablet, and desktop devices.
-- ✅ **Secure Architecture**: API keys are securely managed server-side.
+- ✅ **Real-Time Chat**: Engage in seamless conversations with near-instant API responses.
+- ✅ **Context-Aware**: The engine understands ongoing context to provide highly accurate answers.
+- ✅ **Clean UI**: A stunning, compact single-viewport design inspired by top-tier chat interfaces.
+- ✅ **Dark Mode**: Instantly toggle between a beautiful Soft Cream light theme and a sleek dark mode.
+- ✅ **Responsive Design**: Scales flawlessly across mobile, tablet, and desktop devices.
+- ✅ **Secure Architecture**: API keys remain completely hidden via server-side proxy management.
 
 ## ⚙️ How It Works
 
@@ -35,15 +35,15 @@ flowchart LR
   E --> F[Markdown Render]
 ```
 
-1. **User Input**: Client submits text, immediately locking the UI and injecting a placeholder typing indicator into the DOM.
-2. **TF-IDF Engine**: A local vectorization algorithm calculates cosine similarity to check the query against a hardcoded FAQ dataset.
+1. **User Input**: The client submits text, instantly locking the UI and injecting a typing indicator into the DOM.
+2. **TF-IDF Engine**: A local vectorization algorithm calculates cosine similarity to check queries against a hardcoded FAQ dataset.
 3. **Proxy Request**: If the similarity score falls below the threshold, the client executes an asynchronous fetch to the Node.js backend.
 4. **NVIDIA API**: The Express server intercepts the request, injects the secure API key, and forwards the payload to the Minimax model.
-5. **Response Assembly**: The proxy receives the generated completion and returns it back to the client as JSON.
+5. **Response Assembly**: The proxy receives the generated completion and returns it to the client as JSON.
 6. **Markdown Render**: The frontend parses the raw text via marked.js and sequentially updates the DOM to simulate natural typing.
 
-**Why a Proxy? (API Key Security)**
-Instead of exposing the sensitive NVIDIA API key to the client's browser, the frontend sends a request to our local Node.js backend (`server.js`). The backend then securely attaches the API key and makes the actual request to the NVIDIA NIM endpoint (`https://integrate.api.nvidia.com/v1/chat/completions`). This ensures your credentials remain completely private and secure from malicious actors.
+**API Key Security (Why a Proxy?)**
+Exposing the NVIDIA API key to the client's browser is dangerous. Instead, the frontend sends requests to the local Node.js backend (`server.js`). This backend securely attaches the private API key and queries the NVIDIA NIM endpoint (`https://integrate.api.nvidia.com/v1/chat/completions`). This architecture keeps your credentials completely secure from malicious actors.
 
 ## Tech Stack
 
@@ -51,7 +51,7 @@ Instead of exposing the sensitive NVIDIA API key to the client's browser, the fr
 - **Backend Proxy**: Node.js, Express
 - **API Integration**: Axios, NVIDIA API (`minimaxai/minimax-m3`)
 - **Other**: Markdown Parsing (`marked.js`), Environment Configuration (`dotenv`), CORS (`cors`)
-- **Deployment Configuration**: Vercel (`vercel.json`, `api/chat.js`)
+- **Deployment**: Vercel (`vercel.json`, `api/chat.js`)
 
 ## How to Run
 
@@ -60,21 +60,25 @@ Instead of exposing the sensitive NVIDIA API key to the client's browser, the fr
    git clone https://github.com/poovarasu638178-rgb/codealpha_tasks.git
    cd codealpha_tasks/Task2_NexBot
    ```
+
 2. **Install dependencies:**
    ```bash
    npm install
    ```
+
 3. **Set up environment variables:**
    Create a `.env` file in the root directory and add your NVIDIA API key:
    ```env
    NVIDIA_API_KEY=your_api_key_here
    ```
+
 4. **Start the server:**
    ```bash
    npm start
    ```
+
 5. **Open in browser:**
-   Open [http://localhost:3000](http://localhost:3000)
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## Project Structure
 
