@@ -1,117 +1,96 @@
-<div align="center">
-  
-# 🤖 NexBot
-**Your Intelligent AI Assistant**
+# NexBot — AI Chatbot
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+Your intelligent AI companion, always ready to help.
+
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![MIT License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![NVIDIA API](https://img.shields.io/badge/NVIDIA_API-76B900?style=for-the-badge&logo=nvidia&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
-[<kbd> <br> Live Demo <br> </kbd>](#)
-
-<br><br>
-
-![NexBot Preview](preview.png)
-
-</div>
-
-<br>
-
-## 📖 About NexBot
-NexBot is a highly responsive, modern AI FAQ assistant built as part of the CodeAlpha AI Internship 2026. It combines a beautiful, sleek "Soft Cream" and Dark Mode UI with a custom-built TF-IDF search engine for fast, local FAQ responses. When a question goes beyond the built-in knowledge base, it seamlessly falls back to a powerful NVIDIA LLM (`minimaxai/minimax-m3`) via an Express.js backend API, delivering highly accurate, streaming responses.
+**Live Demo:** [https://nexbott.vercel.app/](https://nexbott.vercel.app/)
 
 ---
 
-## ✨ Features
-✅ **SaaS-Grade UI/UX:** Clean, premium design featuring a modern sidebar, hover effects, and crisp typography (`Plus Jakarta Sans`).  
-✅ **Dark & Light Mode:** Fully persistent theme toggling using CSS variables and `data-theme`.  
-✅ **Hybrid Search Engine:** Custom `TF-IDF` natural language processing algorithm for instant FAQ matching, falling back to an LLM.  
-✅ **Smart AI Typing Effect:** Fluid, animated text streaming that mimics human-like typing speeds.  
-✅ **Session Persistence:** True chat history retention across page reloads and tab switching using HTML5 `sessionStorage`.  
-✅ **Markdown Support:** Full GitHub Flavored Markdown parsing for rich text, code blocks, and formatting.  
-✅ **Fully Responsive:** Perfectly optimized for all screen sizes, from ultra-wide desktops to small smartphones with an animated slide-in sidebar.  
+## About
 
----
+NexBot is a Claude-style AI chatbot powered by the NVIDIA API via a Node.js proxy. Built to be fast, elegant, and secure, NexBot acts as your intelligent AI companion to help answer questions clearly and concisely using the powerful `minimaxai/minimax-m3` model via NVIDIA NIM.
 
-## 🛠️ Tech Stack
-**Frontend:**
-- HTML5 (Semantic Structure)
-- CSS3 (Vanilla CSS, Custom Properties, Media Queries, CSS Grid/Flexbox)
-- Vanilla JavaScript (ES6+, DOM Manipulation)
-- `marked.js` (Markdown parsing)
+## Features
 
-**Backend:**
-- Node.js
-- Express.js
-- Axios (for API requests)
-- CORS
+- ✅ **Real-Time Chat**: Engage in seamless conversations with near-instant responses.
+- ✅ **Context-Aware Responses**: The chatbot understands context and provides accurate answers.
+- ✅ **Clean UI**: A stunning, modern, compact single-viewport design similar to top-tier chat interfaces.
+- ✅ **Dark Mode Support**: Easily toggle between beautiful Soft Cream (light) and Dark themes.
+- ✅ **Responsive Design**: Works perfectly across mobile, tablet, and desktop devices.
+- ✅ **Secure Architecture**: API keys are securely managed server-side.
 
----
+## How It Works
 
-## 🚀 How to Run
+NexBot utilizes a Node.js proxy architecture to communicate with the NVIDIA API.
 
-1. Clone the repository:
-```bash
-git clone https://github.com/poovarasu638178-rgb/CodeAlpha_NexBot.git
-```
+**Why a Proxy? (API Key Security)**
+Instead of exposing the sensitive NVIDIA API key to the client's browser, the frontend sends a request to our local Node.js backend (`server.js`). The backend then securely attaches the API key and makes the actual request to the NVIDIA NIM endpoint (`https://integrate.api.nvidia.com/v1/chat/completions`). This ensures your credentials remain completely private and secure from malicious actors.
 
-2. Navigate into the project directory:
-```bash
-cd CodeAlpha_NexBot
-```
+## Tech Stack
 
-3. Install the dependencies:
-```bash
-npm install
-```
+- **Frontend**: HTML5, CSS3 (Vanilla), JavaScript (Vanilla ES6+)
+- **Backend Proxy**: Node.js, Express
+- **API Integration**: Axios, NVIDIA API (`minimaxai/minimax-m3`)
+- **Other**: Markdown Parsing (`marked.js`), Environment Configuration (`dotenv`), CORS (`cors`)
+- **Deployment Configuration**: Vercel (`vercel.json`, `api/chat.js`)
 
-4. Start the backend server:
-```bash
-node server.js
-```
+## How to Run
 
-5. Open your browser and visit:
-```text
-http://localhost:3000
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/poovarasu638178-rgb/codealpha_tasks.git
+   cd codealpha_tasks/Task2_NexBot
+   ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Set up environment variables:**
+   Create a `.env` file in the root directory and add your NVIDIA API key:
+   ```env
+   NVIDIA_API_KEY=your_api_key_here
+   ```
+4. **Start the server:**
+   ```bash
+   npm start
+   ```
+5. **Open in browser:**
+   Open [http://localhost:3000](http://localhost:3000)
 
----
-
-## 📂 Project Structure
+## Project Structure
 
 ```text
-CodeAlpha_NexBot/
-├── index.html       # The main chat interface
-├── style.css        # Extensive styling, theming, and responsive layouts
-├── script.js        # Frontend logic: TF-IDF engine, API handling, SessionStorage, UI interactions
-├── server.js        # Express.js backend serving static files and proxying the NVIDIA API
-├── package.json     # Node.js dependencies (express, cors, axios)
-└── favicon.png      # NexBot Logo/Avatar
+├── .env                  # Environment variables (API Key)
+├── .gitignore            # Git ignored files
+├── index.html            # Main Chat Interface (Frontend)
+├── style.css             # UI Styling (Light/Dark mode)
+├── script.js             # Client-side Logic (Chat handling)
+├── server.js             # Node.js Proxy Server
+├── package.json          # Project dependencies & scripts
+├── package-lock.json     # Dependency lockfile
+├── vercel.json           # Vercel deployment configuration
+├── api/                  # Vercel Serverless Functions
+│   └── chat.js           # Serverless endpoint for Vercel
+├── favicon.png           # NexBot Logo/Icon
+├── preview.png           # Demo Preview image
+└── test_nvidia.js        # Script to test NVIDIA API connection
 ```
 
----
+## Author
 
-## 🧠 AI Integration
-NexBot uses a sophisticated fallback mechanism for its intelligence:
-1. **Local TF-IDF Search:** It first processes user input locally using a custom Term Frequency-Inverse Document Frequency algorithm to score similarity against known FAQs, saving API calls and ensuring instant responses.
-2. **NVIDIA API (minimaxai/minimax-m3):** If no local match is found, the Express backend securely proxies the request to the NVIDIA API, querying the advanced `minimax-m3` model with custom system prompts to ensure the AI behaves strictly as NexBot.
-
----
-
-## 👨‍💻 Author
-
-Built by **Poovarasu S**  
+Built by **Poovarasu S**
 - **GitHub:** [poovarasu638178-rgb](https://github.com/poovarasu638178-rgb)
 - **Internship:** CodeAlpha AI Internship 2026
 - **Student ID:** CA/DF1/126353
 
+## License
+
+This project is licensed under the MIT License.
+
 ---
-
-## 📄 License
-This project is licensed under the **MIT License**. You are free to use, modify, and distribute this software.
-
----
-
-### ⭐ Star this repo if you found it helpful!
+⭐ **If you like this project, please consider giving it a star on GitHub!**
